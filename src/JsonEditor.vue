@@ -1,11 +1,18 @@
 <template>
-  <json-view 
+  <array-view
+    v-if="Array.isArray(objData)"
+    :parsedData="parsedData" 
+    v-model="parsedData"></array-view>
+  <json-view
+    v-else
     :parsedData="parsedData" 
     v-model="parsedData"></json-view>
+  
 </template>
 
 <script>
 import JsonView from "./JsonView.vue";
+import ArrayView from "./ArrayView.vue";
 import cloneDeep from "lodash.clonedeep";
 
 export default {
@@ -61,7 +68,8 @@ export default {
     }
   },
   components: {
-    "json-view": JsonView
+    "json-view": JsonView,
+    "array-view": ArrayView,
   },
   methods: {
     jsonParse: function (jsonStr) {
